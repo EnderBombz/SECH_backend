@@ -1,0 +1,21 @@
+const express = require('express');
+const app = express();
+const cors = require('cors')
+const routers = require('./routes/router')
+
+
+app.use(cors({
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}));
+
+app.use(express.json());
+
+app.get("/", (req, res) => {
+    res.send("SECH rest API (tmp) - 2021");
+})
+
+app.use(routers);
+
+app.listen(3333, () => {
+    console.log('running on port 3333')
+})
