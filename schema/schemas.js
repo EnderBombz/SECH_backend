@@ -10,12 +10,11 @@ const Estoque = mongoose.model("estoque", {
 })
 
 const Usuarios = mongoose.model("usuarios", {
-    id_user: Number,
+    cpf: Number,
     userlevel: String,
     username: String,
     password: String,
     email: String,
-    cpf: String,
     department: String,
 })
 

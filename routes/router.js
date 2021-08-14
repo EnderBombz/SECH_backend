@@ -1,17 +1,19 @@
 const express = require('express');
 const router = express.Router();
 
-
-const delete_ = require('./delete');
-const get = require('./get')
-const put = require("./put")
-const post = require("./post")
 const auth = require("./authentication/auth")
+const devolucao = require('./devolucao');
+const estoque = require('./estoque')
+const manutencao = require("./manutencao")
+const usuarios = require("./usuarios")
+const equipamentos = require("./solicitarEquipamento")
 
-router.use("/api/get", get);
-router.use("/api/delete", delete_)
-router.use("/api/put", put)
-router.use("/api/post", post)
+router.use("/devolucao", devolucao);
+router.use("/estoque", estoque);
+router.use("/manutencao", manutencao);
+router.use("/usuarios", usuarios);
+//router.use("/equipamentos", equipamentos);
+
 router.use("/api/auth", auth)
 
 module.exports = router;
