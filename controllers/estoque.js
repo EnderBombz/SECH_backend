@@ -2,11 +2,9 @@ const { Estoque } = require("../schema/schemas");
 
 exports.getAll = async (req, res) => {
   try {
-    const estoque = await Estoque.find({}, (response) => {
-      return response.data;
+    await Estoque.find({}, (response) => {
+      res.send(response);
     });
-    console.log(estoque);
-    res.send({ teste: "Retorno", estoque });
   } catch (err) {
     throw err;
   }
