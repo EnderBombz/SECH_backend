@@ -21,16 +21,23 @@ exports.getOne = async(req, res) => {
 }
 exports.postEstoque = async(req, res) => {
     try {
-        const { id_equip, equip_type, equip_description, equip_provider, equip_spec, equip_state } = req.body;
+        const { equip_type, equip_details, equip_spec, equip_state } = req.body;
         const item = new Estoque({
-            id_equip: id_equip,
             equip_type: equip_type,
-            equip_description: equip_description,
-            equip_provider: equip_provider,
+            equip_details: equip_details,
             equip_spec: equip_spec,
             equip_state: equip_state,
         })
         item.save()
+        res.send({
+            message: "cadastrado com sucesso",
+            payload: {
+                equip_type: equip_type,
+                equip_details: equip_details,
+                equip_spec: equip_spec,
+                equip_state: equip_state,
+            }
+        });
     } catch (err) {
         throw err
     }
@@ -39,14 +46,12 @@ exports.postEstoque = async(req, res) => {
 exports.putEstoque = async(req, res) => {
     try {
         const itemId = req.params.itemId
-        const { id_equip, equip_type, equip_description, equip_provider, equip_spec, equip_state } = req.body;
-
+        const { equip_type, equip_details, equip_spec, equip_state } = req.body;
         Estoque.updateOne({ id_equip: itemId }, {
             $set: {
-                id_equip: id_equip,
+
                 equip_type: equip_type,
-                equip_description: equip_description,
-                equip_provider: equip_provider,
+                equip_details: equip_details,
                 equip_spec: equip_spec,
                 equip_state: equip_state,
             }

@@ -1,10 +1,8 @@
 const mongoose = require("./../database/index");
 
-const Estoque = mongoose.model("estoque", {
-    id_equip: Number,
+const Estoque = mongoose.model("werehouse", {
     equip_type: String,
     equip_description: String,
-    equip_provider: String,
     equip_spec: String,
     equip_state: String,
 })
