@@ -8,7 +8,7 @@ const Estoque = mongoose.model("werehouse", {
 })
 
 const Usuarios = mongoose.model("usuarios", {
-    cpf: Number,
+    cpf: String,
     userlevel: String,
     username: String,
     password: String,

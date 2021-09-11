@@ -42,10 +42,12 @@ exports.postEstoque = async(req, res) => {
         throw err
     }
 
+
 }
 exports.putEstoque = async(req, res) => {
     try {
-        const itemId = req.params.itemId
+        const itemId = req.params.itemId;
+
         const { equip_type, equip_details, equip_spec, equip_state } = req.body;
         Estoque.updateOne({ id_equip: itemId }, {
             $set: {
