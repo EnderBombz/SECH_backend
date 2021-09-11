@@ -1,8 +1,8 @@
-const { Estoque } = require("../schema/schemas")
+const { Werehouse } = require("../schema/schemas")
 
 exports.getAll = async(req, res) => {
     try {
-        const estoque = await Estoque.find({});
+        const estoque = await Werehouse.find({});
         console.log(estoque)
         res.send(estoque);
     } catch (err) {
@@ -12,17 +12,17 @@ exports.getAll = async(req, res) => {
 exports.getOne = async(req, res) => {
     try {
         let query = req.params.itemId;
-        const estoque = await Estoque.findOne({ id_equip: query });
+        const estoque = await Werehouse.findOne({ _id: query });
         console.log(estoque)
         res.send(estoque);
     } catch (err) {
         throw err
     }
 }
-exports.postEstoque = async(req, res) => {
+exports.postWerehouse = async(req, res) => {
     try {
         const { equip_type, equip_details, equip_spec, equip_state } = req.body;
-        const item = new Estoque({
+        const item = new Werehouse({
             equip_type: equip_type,
             equip_details: equip_details,
             equip_spec: equip_spec,
@@ -44,28 +44,38 @@ exports.postEstoque = async(req, res) => {
 
 
 }
-exports.putEstoque = async(req, res) => {
+exports.putWerehouse = async(req, res) => {
     try {
         const itemId = req.params.itemId;
 
         const { equip_type, equip_details, equip_spec, equip_state } = req.body;
-        Estoque.updateOne({ id_equip: itemId }, {
+        Werehouse.updateOne({ id_equip: itemId }, {
             $set: {
-
                 equip_type: equip_type,
                 equip_details: equip_details,
                 equip_spec: equip_spec,
                 equip_state: equip_state,
             }
+        }).then((response) => {
+            if (response) {
+                res.send({ message: `Success to update ${userId}` })
+            } else {
+                res.send({ message: `Invalid update` })
+            }
+
         })
     } catch (err) {
         throw err
     }
 }
-exports.deleteEstoque = async(req, res) => {
+exports.deleteWerehouse = async(req, res) => {
+
     try {
         const itemId = req.params.itemId
-        Estoque.deleteOne({ id_equip: itemId })
+        console.log(itemId)
+        Werehouse.deleteOne({ _id: itemId }).then(() => {
+            res.send({ status: 'Task Deleted!' })
+        })
     } catch (err) {
         throw err
     }

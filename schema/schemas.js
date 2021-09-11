@@ -1,6 +1,6 @@
 const mongoose = require("./../database/index");
 
-const Estoque = mongoose.model("werehouse", {
+const Werehouse = mongoose.model("werehouse", {
     equip_type: String,
     equip_description: String,
     equip_spec: String,
@@ -42,4 +42,4 @@ const SolicitacaoManutencao = mongoose.model("solicitacao_manutencao", {
 
 
 
-module.exports = { Estoque, Usuarios, Devolucao, SolicitacaoEquipamento, SolicitacaoManutencao };
+module.exports = { Werehouse, Usuarios, Devolucao, SolicitacaoEquipamento, SolicitacaoManutencao };
