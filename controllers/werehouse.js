@@ -58,7 +58,7 @@ exports.putWerehouse = async(req, res) => {
             }
         }).then((response) => {
             if (response) {
-                res.send({ message: `Success to update ${userId}` })
+                res.send({ message: `Success to update ${itemId}` })
             } else {
                 res.send({ message: `Invalid update` })
             }

@@ -29,6 +29,7 @@ exports.postEquipment = async(req, res) => {
             user_id
         })
         item.save()
+        res.sendStatus(200);
     } catch (err) {
         throw err
     }
@@ -39,7 +40,7 @@ exports.putEquipment = async(req, res) => {
         const itemId = req.params.itemId
         const { equip_list, request_date, user_id } = req.body;
 
-        EquipmentRequest.updateOne({ id_request: itemId }, {
+        EquipmentRequest.updateOne({ _id: itemId }, {
             $set: {
                 equip_list,
                 request_date,
@@ -48,7 +49,7 @@ exports.putEquipment = async(req, res) => {
         }).then((response) => {
 
             if (response) {
-                res.send({ message: `Success to update ${userId}` })
+                res.send({ message: `Success to update ${itemId}` })
             } else {
                 res.send({ message: `Invalid update` })
             }

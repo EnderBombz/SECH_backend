@@ -29,6 +29,7 @@ exports.postDevolution = async(req, res) => {
             devolution_details
         })
         item.save()
+        res.sendStatus(200)
     } catch (err) {
         throw err
     }
@@ -48,7 +49,7 @@ exports.putDevolution = async(req, res) => {
             }
         }).then((response) => {
             if (response) {
-                res.send({ message: `Success to update ${userId}` })
+                res.send({ message: `Success to update ${itemId}` })
             } else {
                 res.send({ message: `Invalid update` })
             }

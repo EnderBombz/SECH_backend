@@ -5,23 +5,8 @@ const bcrypt = require("bcrypt")
 exports.getAll = async(req, res) => {
     try {
         const user = await User.find({});
-        //console.log(usuarios)
 
-        console.log(usuarios)
-
-        /*const saltRounds = 10;
-        bcrypt.hash(usuarios[1].password, saltRounds, function(err, hash) { // Salt + Hash
-            bcrypt.compare(usuarios[1].password, hash, function(err, result) { // Compare
-                // if passwords match
-                if (result) {
-                    console.log("It matches!")
-                }
-                // if passwords do not match
-                else {
-                    console.log("Invalid password!");
-                }
-            });
-        });*/
+        console.log(user)
 
         res.send(user);
     } catch (err) {
@@ -31,13 +16,30 @@ exports.getAll = async(req, res) => {
 exports.getOne = async(req, res) => {
     try {
         let query = req.params.userId;
-        const user = await User.findOne({ cpf: query });
+        const user = await User.findOne({ _id: query });
         console.log(user)
         res.send(user);
     } catch (err) {
         throw err
     }
 }
+exports.getByEmail = async(req, res) => {
+    try {
+        let query = req.body.email;
+        const user = await User.findOne({ "email": query });
+        console.log(user)
+
+        if (user) {
+            res.send(user);
+        } else {
+            res.sendStatus(404);
+        }
+
+    } catch (err) {
+        throw err
+    }
+}
+
 exports.postUser = async(req, res) => {
     try {
 

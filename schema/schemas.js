@@ -30,12 +30,10 @@ const EquipmentRequest = mongoose.model("equipment_request", {
 })
 
 const MaintanceRequest = mongoose.model("maintance_request", {
-    id_maintance: Number,
-    id_equip: String,
-    id_user: String,
-    maintance_date: Date,
-    maintace_type: String,
-    maintance_state: String,
+    equip_list: Array,
+    user_id: String,
+    request_date: Date,
+    maintace_details: String,
 })
 
 

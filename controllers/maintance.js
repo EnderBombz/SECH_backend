@@ -25,17 +25,18 @@ exports.postMaintance = async(req, res) => {
         const {
             user_id,
             equip_list,
-            maintance_date,
+            request_date,
             maintance_details
         } = req.body;
 
         const item = new MaintanceRequest({
             user_id,
             equip_list,
-            maintance_date,
+            request_date,
             maintance_details
         })
         item.save()
+        res.sendStatus(200)
     } catch (err) {
         throw err
     }
@@ -60,7 +61,7 @@ exports.putMaintance = async(req, res) => {
             }
         }).then((response) => {
             if (response) {
-                res.send({ message: `Success to update ${userId}` })
+                res.send({ message: `Success to update ${itemId}` })
             } else {
                 res.send({ message: `Invalid update` })
             }

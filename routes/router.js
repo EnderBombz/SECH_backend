@@ -10,12 +10,11 @@ const users = require("./users")
 const werehouse = require('./werehouse')
 const equipmentRequest = require("./equipmentRequest")
 
-router.use("/devolucao", devolution);
-router.use("/manutencao", maintance);
-
-router.use("/usuarios", users);
-router.use("/solicitacao-equipamentos", equipmentRequest);
-router.use("/estoque", werehouse);
+router.use("/devolution", devolution);
+router.use("/maintance", maintance);
+router.use("/users", users);
+router.use("/equipment-requests", equipmentRequest);
+router.use("/werehouse", werehouse);
 
 router.use("/api/auth", auth)
 
