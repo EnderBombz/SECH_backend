@@ -7,7 +7,7 @@ const Werehouse = mongoose.model("werehouse", {
     equip_state: String,
 })
 
-const Usuarios = mongoose.model("usuarios", {
+const User = mongoose.model("user", {
     cpf: String,
     userlevel: String,
     username: String,
@@ -16,21 +16,20 @@ const Usuarios = mongoose.model("usuarios", {
     department: String,
 })
 
-const Devolucao = mongoose.model("devolucao", {
-    id_devolution: Number,
-    id_equip: String,
-    id_user: String,
-    devolution_date: Date,
+const Devolution = mongoose.model("devolution", {
+    equip_list: Array,
+    user_id: String,
+    devolution_date: String,
+    devolution_details: String,
 })
 
-const SolicitacaoEquipamento = mongoose.model("solicitacao_equipamento", {
-    id_request: Number,
-    id_equip: String,
-    id_user: String,
-    devolution_date: Date,
+const EquipmentRequest = mongoose.model("equipment_request", {
+    equip_list: Array,
+    user_id: String,
+    request_date: String,
 })
 
-const SolicitacaoManutencao = mongoose.model("solicitacao_manutencao", {
+const MaintanceRequest = mongoose.model("maintance_request", {
     id_maintance: Number,
     id_equip: String,
     id_user: String,
@@ -42,4 +41,4 @@ const SolicitacaoManutencao = mongoose.model("solicitacao_manutencao", {
 
 
 
-module.exports = { Werehouse, Usuarios, Devolucao, SolicitacaoEquipamento, SolicitacaoManutencao };
+module.exports = { Werehouse, User, Devolution, EquipmentRequest, MaintanceRequest };

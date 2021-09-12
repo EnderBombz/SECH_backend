@@ -2,17 +2,20 @@ const express = require('express');
 const router = express.Router();
 
 const auth = require("./authentication/auth")
-const devolucao = require('./devolucao');
-const werehouse = require('./werehouse')
-const manutencao = require("./manutencao")
-const usuarios = require("./usuarios")
-const equipamentos = require("./solicitarEquipamento")
 
-router.use("/devolucao", devolucao);
+
+const devolution = require('./devolution');
+const maintance = require("./maintance")
+const users = require("./users")
+const werehouse = require('./werehouse')
+const equipmentRequest = require("./equipmentRequest")
+
+router.use("/devolucao", devolution);
+router.use("/manutencao", maintance);
+
+router.use("/usuarios", users);
+router.use("/solicitacao-equipamentos", equipmentRequest);
 router.use("/estoque", werehouse);
-router.use("/manutencao", manutencao);
-router.use("/usuarios", usuarios);
-//router.use("/equipamentos", equipamentos);
 
 router.use("/api/auth", auth)
 

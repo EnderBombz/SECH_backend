@@ -1,10 +1,10 @@
-const { Usuarios } = require("../schema/schemas")
+const { User } = require("../schema/schemas")
 const bcrypt = require("bcrypt")
 
 
 exports.getAll = async(req, res) => {
     try {
-        const usuarios = await Usuarios.find({});
+        const user = await User.find({});
         //console.log(usuarios)
 
         console.log(usuarios)
@@ -23,7 +23,7 @@ exports.getAll = async(req, res) => {
             });
         });*/
 
-        res.send(usuarios);
+        res.send(user);
     } catch (err) {
         throw err
     }
@@ -31,14 +31,14 @@ exports.getAll = async(req, res) => {
 exports.getOne = async(req, res) => {
     try {
         let query = req.params.userId;
-        const usuarios = await Usuarios.findOne({ cpf: query });
-        console.log(usuarios)
-        res.send(usuarios);
+        const user = await User.findOne({ cpf: query });
+        console.log(user)
+        res.send(user);
     } catch (err) {
         throw err
     }
 }
-exports.postUsuarios = async(req, res) => {
+exports.postUser = async(req, res) => {
     try {
 
 
@@ -49,7 +49,7 @@ exports.postUsuarios = async(req, res) => {
         await bcrypt.genSalt(saltRounds, (err, salt) => {
             bcrypt.hash(password, salt, function(err, hash) {
 
-                const item = new Usuarios({
+                const item = new User({
                     cpf: cpf,
                     userlevel: userlevel,
                     username: username,
@@ -67,17 +67,17 @@ exports.postUsuarios = async(req, res) => {
     }
 
 }
-exports.putUsuarios = async(req, res) => {
+exports.putUser = async(req, res) => {
     try {
         const userId = req.params.userId
 
-        const usuario = await Usuarios.findOne({ _id: userId });
-        console.log({ old: { usuario } })
+        const user = await User.findOne({ _id: userId });
+        console.log({ old: { user } })
 
         const { cpf, userlevel, username, password, email, department } = req.body;
         console.log({ new: { cpf, userlevel, username, password, email, department } })
 
-        Usuarios.updateOne({ _id: userId }, {
+        User.updateOne({ _id: userId }, {
             cpf: cpf,
             userlevel: userlevel,
             username: username,
@@ -96,11 +96,11 @@ exports.putUsuarios = async(req, res) => {
         throw err
     }
 }
-exports.deleteUsuarios = async(req, res) => {
+exports.deleteUser = async(req, res) => {
     try {
         const userId = req.params.userId
         console.log(userId)
-        Usuarios.deleteOne({ _id: userId }).then(() => {
+        User.deleteOne({ _id: userId }).then(() => {
             res.send({ status: 'Task Deleted!' })
         })
     } catch (err) {
