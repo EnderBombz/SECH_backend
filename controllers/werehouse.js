@@ -19,6 +19,25 @@ exports.getOne = async(req, res) => {
         throw err
     }
 }
+exports.getComputers = async(req, res) => {
+    try {
+        const estoque = await Werehouse.find({ equip_type: "computer" });
+        console.log(estoque)
+        res.send(estoque);
+    } catch (err) {
+        throw err
+    }
+}
+exports.getPeripheals = async(req, res) => {
+    try {
+
+        const estoque = await Werehouse.find({ equip_type: "peripheals" });
+        console.log(estoque)
+        res.send(estoque);
+    } catch (err) {
+        throw err
+    }
+}
 exports.postWerehouse = async(req, res) => {
     try {
         const { equip_type, equip_details, equip_spec, equip_state } = req.body;
