@@ -4,7 +4,7 @@ const Werehouse = mongoose.model("werehouse", {
   equip_type: String,
   equip_class: String,
   equip_name: String,
-  equip_description: String,
+  equip_details: String,
   equip_spec: String,
   equip_state: String
 });
