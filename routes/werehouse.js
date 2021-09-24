@@ -6,6 +6,8 @@ router.get("/getAll", werehouseController.getAll);
 router.get("/get/:itemId", werehouseController.getOne);
 router.get("/getPeripheals", werehouseController.getPeripheals);
 router.get("/getComputers", werehouseController.getComputers);
+router.get("/getFreePeripheals", werehouseController.getFreePeripheals);
+router.get("/getFreeComputers", werehouseController.getFreeComputers);
 
 
 router.post("/post", werehouseController.postWerehouse);
