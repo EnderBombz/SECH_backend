@@ -44,7 +44,14 @@ exports.postUser = async(req, res) => {
     try {
 
 
-        const { cpf, userlevel, username, password, email, department } = req.body;
+        const {
+            cpf,
+            userlevel,
+            username,
+            password,
+            email,
+            department
+        } = req.body;
         const saltRounds = 10;
 
         let crypt_pass

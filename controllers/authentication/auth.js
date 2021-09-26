@@ -8,6 +8,7 @@ require('dotenv').config();
 exports.auth = async(req, res) => {
 
     const { email, password } = req.body;
+    console.log({ email, password })
 
     /*const user = {
         id: 1,
@@ -37,10 +38,12 @@ exports.auth = async(req, res) => {
                 bcrypt.compare(account.password, hash, function(err, result) { // Compare
 
                     // if passwords match
+                    const payload = JSON.stringify(account)
+
                     if (result) {
                         return res.json({
-                            account,
-                            token: jwt.sign(account, process.env.JWT_PASSWORD)
+                            payload,
+                            token: jwt.sign(payload, process.env.JWT_PASSWORD)
                         })
                     }
 
