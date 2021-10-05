@@ -14,7 +14,7 @@ const authMiddleware = require('../middleware/auth')
 
 
 router.use("/api/auth", auth)
-router.use(authMiddleware);
+    //router.use(authMiddleware);
 router.use("/devolution", devolution);
 router.use("/maintance", maintance);
 router.use("/users", users);

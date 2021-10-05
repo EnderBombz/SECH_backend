@@ -21,6 +21,17 @@ exports.getOne = async(req, res) => {
         throw err
     }
 }
+exports.getProfileRequests = async(req, res) => {
+    try {
+        let query = req.params.userId;
+        const userRequests = await EquipmentRequest.find({ user_id: query });
+        console.log(userRequests);
+        res.send(userRequests);
+    } catch (err) {
+        throw err
+    }
+}
+
 exports.postEquipment = async(req, res) => {
     try {
         const { equip_list, request_date, user_id } = req.body;
@@ -43,7 +54,7 @@ exports.postEquipment = async(req, res) => {
             }).then((response) => {
 
                 if (response) {
-                    res.send({ message: `Success to update ${itemId}` })
+                    res.send({ message: `Success to update ${element._id}` })
                 } else {
                     res.send({ message: `Invalid update` })
                 }
