@@ -105,10 +105,11 @@ exports.deleteEquipment = async(req, res) => {
 
     try {
         const itemId = req.params.itemId
-        console.log(itemId)
         EquipmentRequest.deleteOne({ _id: itemId }).then(() => {
             res.send({ status: 'Task Deleted!' })
         })
+
+
     } catch (err) {
         throw err
     }

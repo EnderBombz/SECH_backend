@@ -114,6 +114,43 @@ exports.putWerehouse = async(req, res) => {
         throw err;
     }
 };
+exports.putfreeWerehouse = async(req, res) => {
+    try {
+        const itemId = req.params.itemId;
+        const { equip_list } = req.body;
+
+        const list = JSON.parse(equip_list);
+        console.log(list);
+
+        list.forEach(element => {
+            element.equip_state = "livre";
+        })
+
+        list.forEach(element => {
+            Werehouse.updateOne({ _id: element._id }, {
+                $set: {
+                    equip_type: element.equip_type,
+                    equip_details: element.equip_details,
+                    equip_spec: element.equip_spec,
+                    equip_state: element.equip_state,
+                    equip_class: element.equip_class,
+                    equip_name: element.equip_name
+                }
+            }).then((response) => {
+                if (response) {
+                    console.log({ message: `Success to update ${element._id}` })
+                    res.send({ message: `Success to update ${element._id}` })
+                } else {
+                    console.log({ message: `Invalid update` })
+                    res.send({ message: `Invalid update` })
+                }
+            })
+        })
+
+    } catch (err) {
+        throw err;
+    }
+};
 exports.deleteWerehouse = async(req, res) => {
     try {
         const itemId = req.params.itemId;

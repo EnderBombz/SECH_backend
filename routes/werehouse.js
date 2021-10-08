@@ -9,6 +9,7 @@ router.get("/getComputers", werehouseController.getComputers);
 router.get("/getFreePeripheals", werehouseController.getFreePeripheals);
 router.get("/getFreeComputers", werehouseController.getFreeComputers);
 
+router.put("/put-free/:itemId", werehouseController.putfreeWerehouse);
 
 router.post("/post", werehouseController.postWerehouse);
 router.delete("/delete/:itemId", werehouseController.deleteWerehouse);
