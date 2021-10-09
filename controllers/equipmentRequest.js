@@ -65,7 +65,8 @@ exports.postEquipment = async(req, res) => {
         const item = new EquipmentRequest({
             equip_list: list,
             request_date,
-            user_id
+            user_id,
+            request_status: "pending"
         })
         item.save()
 
