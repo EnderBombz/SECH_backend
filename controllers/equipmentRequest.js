@@ -31,6 +31,20 @@ exports.getProfileRequests = async(req, res) => {
         throw err
     }
 }
+exports.getHaveProfileRequest = async(req, res) => {
+    try {
+        let query = req.params.userId;
+        const userRequests = await EquipmentRequest.find({ user_id: query });
+        console.log(userRequests)
+        if (userRequests.length > 0) {
+            res.send(true)
+        } else {
+            res.send(false)
+        }
+    } catch (err) {
+        throw err
+    }
+}
 
 exports.postEquipment = async(req, res) => {
     try {
@@ -66,7 +80,7 @@ exports.postEquipment = async(req, res) => {
             equip_list: list,
             request_date,
             user_id,
-            request_status: "pending"
+            request_status: "pending",
         })
         item.save()
 
