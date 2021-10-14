@@ -1,7 +1,6 @@
 const { EquipmentRequest } = require("../schema/schemas")
 const { Werehouse } = require("../schema/schemas")
 
-
 exports.getAll = async(req, res) => {
     try {
         const equipmentRequest = await EquipmentRequest.find({});
@@ -46,9 +45,38 @@ exports.getHaveProfileRequest = async(req, res) => {
     }
 }
 
+exports.getAllPendingRequest = async(req, res) => {
+    try {
+        const userRequests = await EquipmentRequest.find({ request_type: "equipment" });
+        console.log(userRequests)
+        if (userRequests.length > 0) {
+            res.send(userRequests)
+        } else {
+            res.send(userRequests);
+        }
+    } catch (err) {
+        throw err
+    }
+}
+exports.getUserPendingRequest = async(req, res) => {
+    try {
+        let query = req.params.userId;
+        const userRequests = await EquipmentRequest.find({ user_id: query, request_type: "equipment" });
+        console.log(userRequests)
+        if (userRequests.length > 0) {
+            res.send(userRequests)
+        } else {
+            res.send(userRequests);
+        }
+    } catch (err) {
+        throw err
+    }
+}
+
+
 exports.postEquipment = async(req, res) => {
     try {
-        const { equip_list, request_date, user_id } = req.body;
+        const { equip_list, request_date, user_id, request_type } = req.body;
         const list = JSON.parse(equip_list);
 
         list.forEach(element => {
@@ -81,6 +109,7 @@ exports.postEquipment = async(req, res) => {
             request_date,
             user_id,
             request_status: "pending",
+            request_type: request_type
         })
         item.save()
 
@@ -94,18 +123,21 @@ exports.postEquipment = async(req, res) => {
 exports.putEquipment = async(req, res) => {
     try {
         const itemId = req.params.itemId
-        const { equip_list, request_date, user_id } = req.body;
+        const { equip_list, request_date, user_id, request_status, request_type } = req.body;
+        const list = JSON.parse(equip_list);
 
         EquipmentRequest.updateOne({ _id: itemId }, {
             $set: {
-                equip_list,
+                equip_list: list,
                 request_date,
-                user_id
+                user_id,
+                request_status: request_status,
+                request_type
             }
         }).then((response) => {
 
             if (response) {
-                res.send({ message: `Success to update ${itemId}` })
+                res.send({ message: `Success to update ${element._id}` })
             } else {
                 res.send({ message: `Invalid update` })
             }

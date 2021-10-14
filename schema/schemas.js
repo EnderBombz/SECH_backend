@@ -15,7 +15,8 @@ const User = mongoose.model("user", {
     username: String,
     password: String,
     email: String,
-    department: String
+    department: String,
+    equipments: Array,
 });
 
 const Devolution = mongoose.model("devolution", {
@@ -29,7 +30,8 @@ const EquipmentRequest = mongoose.model("equipment_request", {
     equip_list: Array,
     user_id: String,
     request_date: String,
-    request_status: String
+    request_status: String,
+    request_type: String
 });
 
 const MaintanceRequest = mongoose.model("maintance_request", {

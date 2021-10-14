@@ -65,6 +65,7 @@ exports.postUser = async(req, res) => {
                     password: hash,
                     email: email,
                     department: department,
+                    equipments: [],
                 })
                 item.save()
                 res.sendStatus(200)
