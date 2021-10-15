@@ -1,5 +1,6 @@
 const { EquipmentRequest } = require("../schema/schemas")
 const { Werehouse } = require("../schema/schemas")
+const { User } = require("../schema/schemas")
 
 exports.getAll = async(req, res) => {
     try {
@@ -135,11 +136,51 @@ exports.putEquipment = async(req, res) => {
                 request_type
             }
         }).then((response) => {
+            if (response) {
+                console.log({ message: `Success to update ${itemId}` })
+            } else {
+                console.log({ message: `Invalid update` })
+            }
+
+        })
+    } catch (err) {
+        throw err
+    }
+
+}
+exports.putFinishEquipment = async(req, res) => {
+    try {
+        const itemId = req.params.itemId
+        const { equip_list, request_date, user_id, request_status, request_type } = req.body;
+        const list = JSON.parse(equip_list);
+
+        EquipmentRequest.updateOne({ _id: itemId }, {
+            $set: {
+                equip_list: list,
+                request_date,
+                user_id,
+                request_status: request_status,
+                request_type
+            }
+        }).then((response) => {
 
             if (response) {
-                res.send({ message: `Success to update ${element._id}` })
+                console.log({ message: `Success to update ${itemId}` })
+
+                User.updateOne({ _id: user_id }, {
+                    $set: {
+                        equipments: list,
+                    }
+                }).then((response) => {
+                    if (response) {
+                        console.log({ message: `Success to update ${user_id}` })
+
+                    } else {
+                        console.log({ message: `Invalid update` })
+                    }
+                })
             } else {
-                res.send({ message: `Invalid update` })
+                console.log({ message: `Invalid update` })
             }
 
         })
