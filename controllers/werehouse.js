@@ -3,7 +3,7 @@ const { Werehouse } = require("../schema/schemas");
 exports.getAll = async(req, res) => {
     try {
         const estoque = await Werehouse.find({});
-        console.log(estoque);
+        //console.log(estoque);
         res.send(estoque);
     } catch (err) {
         throw err;
@@ -13,7 +13,7 @@ exports.getOne = async(req, res) => {
     try {
         let query = req.params.itemId;
         const estoque = await Werehouse.findOne({ _id: query });
-        console.log(estoque);
+        //console.log(estoque);
         res.send(estoque);
     } catch (err) {
         throw err;
@@ -22,7 +22,7 @@ exports.getOne = async(req, res) => {
 exports.getComputers = async(req, res) => {
     try {
         const estoque = await Werehouse.find({ equip_type: "computer" });
-        console.log(estoque);
+        // console.log(estoque);
         res.send(estoque);
     } catch (err) {
         throw err;
@@ -31,7 +31,7 @@ exports.getComputers = async(req, res) => {
 exports.getFreeComputers = async(req, res) => {
     try {
         const estoque = await Werehouse.find({ equip_type: "computer", equip_state: "livre" });
-        console.log(estoque);
+        // console.log(estoque);
         res.send(estoque);
     } catch (err) {
         throw err;
@@ -40,7 +40,7 @@ exports.getFreeComputers = async(req, res) => {
 exports.getPeripheals = async(req, res) => {
     try {
         const estoque = await Werehouse.find({ equip_type: "peripheals" });
-        console.log(estoque);
+        // console.log(estoque);
         res.send(estoque);
     } catch (err) {
         throw err;
@@ -49,7 +49,7 @@ exports.getPeripheals = async(req, res) => {
 exports.getFreePeripheals = async(req, res) => {
     try {
         const estoque = await Werehouse.find({ equip_type: "peripheals", equip_state: "livre" });
-        console.log(estoque);
+        //  console.log(estoque);
         res.send(estoque);
     } catch (err) {
         throw err;
@@ -120,7 +120,7 @@ exports.putfreeWerehouse = async(req, res) => {
         const { equip_list } = req.body;
 
         const list = JSON.parse(equip_list);
-        console.log(list);
+        // console.log(list);
 
         list.forEach(element => {
             element.equip_state = "livre";
@@ -154,7 +154,7 @@ exports.putfreeWerehouse = async(req, res) => {
 exports.deleteWerehouse = async(req, res) => {
     try {
         const itemId = req.params.itemId;
-        console.log(itemId);
+        // console.log(itemId);
         Werehouse.deleteOne({ _id: itemId }).then(() => {
             res.send({ status: "Task Deleted!" });
         });

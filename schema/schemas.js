@@ -31,7 +31,9 @@ const EquipmentRequest = mongoose.model("equipment_request", {
     user_id: String,
     request_date: String,
     request_status: String,
-    request_type: String
+    request_type: String,
+    request_details: String,
+    request_response: String
 });
 
 const MaintanceRequest = mongoose.model("maintance_request", {

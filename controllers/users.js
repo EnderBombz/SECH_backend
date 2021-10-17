@@ -6,7 +6,7 @@ exports.getAll = async(req, res) => {
     try {
         const user = await User.find({});
 
-        console.log(user)
+        // console.log(user)
 
         res.send(user);
     } catch (err) {
@@ -17,7 +17,7 @@ exports.getOne = async(req, res) => {
     try {
         let query = req.params.userId;
         const user = await User.findOne({ _id: query });
-        console.log(user)
+        //console.log(user)
         res.send(user);
     } catch (err) {
         throw err
@@ -27,7 +27,7 @@ exports.getByEmail = async(req, res) => {
     try {
         let query = req.body.email;
         const user = await User.findOne({ "email": query });
-        console.log(user)
+        // console.log(user)
 
         if (user) {
             res.send(user);
@@ -82,10 +82,10 @@ exports.putUser = async(req, res) => {
         const userId = req.params.userId
 
         const user = await User.findOne({ _id: userId });
-        console.log({ old: { user } })
+        // console.log({ old: { user } })
 
         const { cpf, userlevel, username, password, email, department } = req.body;
-        console.log({ new: { cpf, userlevel, username, password, email, department } })
+        //  console.log({ new: { cpf, userlevel, username, password, email, department } })
 
         User.updateOne({ _id: userId }, {
             cpf: cpf,
@@ -109,7 +109,7 @@ exports.putUser = async(req, res) => {
 exports.deleteUser = async(req, res) => {
     try {
         const userId = req.params.userId
-        console.log(userId)
+            //  console.log(userId)
         User.deleteOne({ _id: userId }).then(() => {
             res.send({ status: 'Task Deleted!' })
         })
