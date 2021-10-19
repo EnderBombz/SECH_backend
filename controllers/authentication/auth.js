@@ -18,14 +18,14 @@ exports.auth = async(req, res) => {
     }*/
     console.log(email, password)
     if (!email || !password) {
-        res.sendStatus(400)
+        res.send({ message: "Preencha todos os campos", status: 400 })
     }
 
     let validate_email = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i
     console.log(validate_email.test(email))
 
     if (!validate_email.test(email)) {
-        res.sendStatus(400)
+        res.send({ message: "Informe um email válido", status: 400 })
     } else {
 
         const account = await User.findOne({ "email": email });
@@ -35,8 +35,10 @@ exports.auth = async(req, res) => {
 
             const saltRounds = 10;
             bcrypt.hash(account.password, saltRounds, function(err, hash) { // Salt + Hash
-                bcrypt.compare(account.password, hash, function(err, result) { // Compare
+                bcrypt.compare(password, account.password, function(err, result) { // Compare
 
+
+                    console.log(result);
                     // if passwords match
                     const payload = JSON.stringify(account)
 
@@ -49,12 +51,12 @@ exports.auth = async(req, res) => {
 
                     // if passwords do not match
                     else {
-                        res.sendStatus(400);
+                        res.send({ message: "Senha ou email incorreto", status: 400 });
                     }
                 });
             });
         } else {
-            res.sendStatus(404);
+            res.sendStatus({ message: "Dados incorretos", status: 404 });
         }
 
 
