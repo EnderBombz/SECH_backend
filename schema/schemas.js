@@ -19,16 +19,10 @@ const User = mongoose.model("user", {
     equipments: Array,
 });
 
-const Devolution = mongoose.model("devolution", {
-    equip_list: Array,
-    user_id: String,
-    devolution_date: String,
-    devolution_details: String
-});
 
 const EquipmentRequest = mongoose.model("equipment_request", {
     equip_list: Array,
-    user_id: String,
+    user_data: Object,
     request_date: String,
     request_status: String,
     request_type: String,
@@ -36,17 +30,9 @@ const EquipmentRequest = mongoose.model("equipment_request", {
     request_response: String
 });
 
-const MaintanceRequest = mongoose.model("maintance_request", {
-    equip_list: Array,
-    user_id: String,
-    request_date: Date,
-    maintace_details: String
-});
 
 module.exports = {
     Werehouse,
     User,
-    Devolution,
     EquipmentRequest,
-    MaintanceRequest
 };

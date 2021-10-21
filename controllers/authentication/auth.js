@@ -56,7 +56,7 @@ exports.auth = async(req, res) => {
                 });
             });
         } else {
-            res.sendStatus({ message: "Dados incorretos", status: 404 });
+            res.send({ message: "Dados incorretos", status: 404 });
         }
 
 
